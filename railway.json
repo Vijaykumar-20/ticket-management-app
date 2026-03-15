@@ -1,0 +1,11 @@
+{
+  "$schema": "https://railway.app/sm_schema.json",
+  "build": {
+    "builder": "NIXPACKS",
+    "rootDirectory": "backend"
+  },
+  "deploy": {
+    "startCommand": "java -jar target/backend-0.0.1-SNAPSHOT.jar",
+    "restartPolicyType": "ON_FAILURE"
+  }
+}
