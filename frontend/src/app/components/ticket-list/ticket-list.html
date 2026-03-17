@@ -1,0 +1,39 @@
+<div class="app-container animate-fade-in">
+  <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem;">
+    <h2>Ticket Board</h2>
+    <button class="btn btn-primary" routerLink="/new">
+      Create Ticket
+    </button>
+  </div>
+
+  <div class="glass-card">
+    @if (tickets().length === 0) {
+      <div style="text-align: center; color: var(--text-secondary); padding: 2rem;">
+        No tickets found. Create one to get started!
+      </div>
+    } @else {
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem;">
+        @for (ticket of tickets(); track ticket.id) {
+          <div class="glass-card hover-lift" style="box-shadow: none; border-color: rgba(255, 255, 255, 0.05); cursor: default;">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start;">
+              <h3 style="margin: 0; font-size: 1.25rem;">{{ ticket.title }}</h3>
+              <span class="badge badge-{{ticket.status | lowercase}}">{{ ticket.status }}</span>
+            </div>
+            
+            <p style="color: var(--text-secondary); margin: 1rem 0; font-size: 0.875rem; white-space: pre-wrap; word-break: break-word;">{{ ticket.description }}</p>
+            
+            <div style="display: flex; justify-content: space-between; align-items: center; font-size: 0.875rem;">
+              <span class="priority-{{ticket.priority | lowercase}}">● {{ ticket.priority }}</span>
+              <span style="color: var(--text-secondary);">{{ ticket.createdAt | date:'shortDate' }}</span>
+            </div>
+
+            <div style="margin-top: 1.5rem; display: flex; gap: 0.5rem; justify-content: flex-end;">
+              <button class="btn btn-primary" style="background: rgba(255,255,255,0.1); box-shadow: none;" [routerLink]="['/edit', ticket.id]">Edit</button>
+              <button class="btn btn-primary" style="background: rgba(239, 68, 68, 0.2); box-shadow: none; color: #fca5a5" (click)="deleteTicket(ticket.id)">Delete</button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+  </div>
+</div>
