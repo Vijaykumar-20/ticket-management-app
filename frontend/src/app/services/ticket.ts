@@ -7,7 +7,7 @@ import { Ticket } from '../models/ticket.model';
   providedIn: 'root'
 })
 export class TicketService {
-  private apiUrl = 'http://localhost:8080/api/v1/tickets';
+  private apiUrl = '/api/v1/tickets';
   private http = inject(HttpClient);
 
   getTickets(): Observable<Ticket[]> {
